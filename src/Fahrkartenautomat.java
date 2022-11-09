@@ -44,7 +44,8 @@ class Fahrkartenautomat {
         System.out.println("\n\n");
 
         // Rückgeldberechnung und -ausgabe
-        rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
+        rueckgabebetrag = eingezahlterGesamtbetrag - (zuZahlenderBetrag * tickets);
+
         if (rueckgabebetrag > 0.0) {
             System.out.println("Der Rückgabebetrag in Höhe von " + String.format("%.2f", rueckgabebetrag) + " Euro");
             System.out.println("wird in folgenden Münzen ausgezahlt:");
@@ -69,7 +70,14 @@ class Fahrkartenautomat {
                 System.out.println("10 Cent");
                 rueckgabebetrag = rueckgabebetrag - 0.1;
             }
-            while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
+
+            /**
+             * Ticketpreis (Euro): 2,10
+             * Anzahl der Tickets: 1
+             *
+             * Letzter Ticket ist 0,049 => aufrunden, damit wir den Rest ausgeben können
+             */
+            while ((Math.round(rueckgabebetrag*100.0)/100.0) >= 0.05) { // 5-Cent-Münzen
                 System.out.println("5 Cent");
                 rueckgabebetrag = rueckgabebetrag - 0.05;
             }
