@@ -13,8 +13,9 @@ public class Willkommen {
         double eingezahlterGesamtBetrag = fahrkartenBezahlen(input, zuZahlenderBetrag);
 
         System.out.printf("Du hast %.2f EUR bezahlt.\n", eingezahlterGesamtBetrag);
-
         fahrkartenAusgeben();
+
+        rueckgeldAusgeben(zuZahlenderBetrag, eingezahlterGesamtBetrag);
     }
 
     public static void begreussung() {
@@ -51,5 +52,47 @@ public class Willkommen {
     public static void fahrkartenAusgeben() {
         System.out.println("Fahrschein wird ausgegeben");
         System.out.print("==========================");
+    }
+
+    public static void rueckgeldAusgeben(double zuZahlenderBetrag, double eingezahlterGesamtbetrag) {
+        // Rückgeldberechnung und -ausgabe
+        double rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
+
+        if (rueckgabebetrag > 0.0) {
+            System.out.println("Der Rückgabebetrag in Höhe von " + String.format("%.2f", rueckgabebetrag) + " Euro");
+            System.out.println("wird in folgenden Münzen ausgezahlt:");
+
+            while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
+                System.out.println("2 Euro");
+                rueckgabebetrag = rueckgabebetrag - 2.0;
+            }
+            while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
+                System.out.println("1 Euro");
+                rueckgabebetrag = rueckgabebetrag - 1.0;
+            }
+            while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
+                System.out.println("50 Cent");
+                rueckgabebetrag = rueckgabebetrag - 0.5;
+            }
+            while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
+                System.out.println("20 Cent");
+                rueckgabebetrag = rueckgabebetrag - 0.2;
+            }
+            while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
+                System.out.println("10 Cent");
+                rueckgabebetrag = rueckgabebetrag - 0.1;
+            }
+
+            /**
+             * Ticketpreis (Euro): 2,10
+             * Anzahl der Tickets: 1
+             *
+             * Letzter Ticket ist 0,049 => aufrunden, damit wir den Rest ausgeben können
+             */
+            while ((Math.round(rueckgabebetrag*100.0)/100.0) >= 0.05) { // 5-Cent-Münzen
+                System.out.println("5 Cent");
+                rueckgabebetrag = rueckgabebetrag - 0.05;
+            }
+        }
     }
 }
