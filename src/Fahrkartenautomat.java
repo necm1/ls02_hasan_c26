@@ -17,7 +17,7 @@ class Fahrkartenautomat {
         zuZahlenderBetrag = tastatur.nextDouble();
 
         System.out.print("Anzahl der Tickets: ");
-        tickets = tastatur.nextInt();
+        tickets = checkTicketAmount(tastatur.nextInt(), tastatur);
 
         // Geldeinwurf
         eingezahlterGesamtbetrag = 0.0;
@@ -87,5 +87,15 @@ class Fahrkartenautomat {
                 + "Wir wünschen Ihnen eine gute Fahrt.");
 
         tastatur.close();
+    }
+
+    public static int checkTicketAmount(int amount, Scanner scanner) {
+        if (amount > 0 && amount < 10) {
+            return amount;
+        }
+
+        System.out.println(" >> Wählen Sie bitte eine Anzahl von 10 bis 10 Tickets aus. << ");
+        System.out.print("Anzahl der Tickets: ");
+        return checkTicketAmount(scanner.nextInt(), scanner);
     }
 }
