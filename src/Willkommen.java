@@ -11,6 +11,10 @@ public class Willkommen {
         begreussung();
         double zuZahlenderBetrag = fahrkartenbestellungErfassen(input);
         double eingezahlterGesamtBetrag = fahrkartenBezahlen(input, zuZahlenderBetrag);
+
+        System.out.printf("Du hast %.2f EUR bezahlt.\n", eingezahlterGesamtBetrag);
+
+        fahrkartenAusgeben();
     }
 
     public static void begreussung() {
@@ -42,5 +46,10 @@ public class Willkommen {
         }
 
         return eingezahlterGesamtbetrag;
+    }
+
+    public static void fahrkartenAusgeben() {
+        System.out.println("Fahrschein wird ausgegeben");
+        System.out.print("==========================");
     }
 }
